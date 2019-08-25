@@ -8,8 +8,6 @@
     <origin xyz="0 0 0" rpy="0 0 0" />
     <parent link="robot_footprint"/>
     <child link="chassis" />
-    <child link="left_wheel" />
-    <child link="right_wheel" />
   </joint>
 
 <!-- robot chasis -->
@@ -70,6 +68,12 @@
     </visual>
   </link>
 
+<joint name="robot_right_wheel_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+  <parent link="chasis"/>
+  <child link="right_wheel"/>
+</joint>
+
 <!-- right side wheel -->
   <link name="right_wheel">
 
@@ -95,6 +99,12 @@
       </geometry>
     </collision>
   </link>
+
+<joint name="robot_left_wheel_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+  <parent link="chasis"/>
+  <child link="left_wheel"/>
+</joint>
 
 <!-- left side wheel -->
   <link name="left_wheel">
@@ -131,7 +141,7 @@
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
-<joint type="continuous" name="right_wheel_hinge">
+ <joint type="continuous" name="right_wheel_hinge">
     <origin xyz="0 0.15 0" rpy="0 0 0"/>
     <child link="left_wheel"/>
     <parent link="chassis"/>
@@ -139,6 +149,5 @@
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
-
 
 </robot>
