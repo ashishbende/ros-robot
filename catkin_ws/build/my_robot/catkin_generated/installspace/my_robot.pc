@@ -1,8 +1,8 @@
-prefix=/home/ashish/Lab/Robotics/ros-robot/catkin_ws/install
+prefix=/home/mugen/Lab/Robotics/ros-robot/catkin_ws/install
 
 Name: my_robot
 Description: Description of my_robot
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/ashish/Lab/Robotics/ros-robot/catkin_ws/install/lib 
+Libs: -L/home/mugen/Lab/Robotics/ros-robot/catkin_ws/install/lib 
 Requires: 
