@@ -1,6 +1,7 @@
 #include "ros/ros.h"
 #include "ball_chaser/DriveToTarget.h"
 #include <sensor_msgs/Image.h>
+#include "ros/console.h"
 
 // Define a global client that can request services
 ros::ServiceClient client;
@@ -21,57 +22,67 @@ void drive_robot(float lin_x, float ang_z)
 // This callback function continuously executes and reads the image data
 void process_image_callback(const sensor_msgs::Image img)
 {
-
     int white_pixel = 255;
+    int red_channel = 0;
+    int green_channel = 0;
+    int blue_channel = 0;
+    
+    int mat_col_index = 0;
+    int l_pixels = 0;
+    int m_pixels = 0;
+    int r_pixels = 0;
 
-    // TODO: Loop through each pixel in the image and check if there's a bright white one
-    // Then, identify if this pixel falls in the left, mid, or right side of the image
-    // Depending on the white ball position, call the drive_bot function and pass velocities to it
-    // Request a stop when there's no white ball seen by the camera
 
-    // to decide where we need to turn, we can find the offset between the center of ball 
-    // and center of camera image.
+    // each step comprise of r,g,b chnls
+    for(int i=0; i< img.height*img.step; i+=3){
 
-    float lin_x;
-    float ang_z;
+        red_channel = img.data[i];
+        green_channel = img.data[i+1];
+        blue_channel = img.data[i+2];
+        mat_col_index = i % (img.step)/3;
 
-    int rows = img.height;
-    int steps = img.step; // img.height?
-    int image_center = steps/2.0;
-
-    float offset = 0;
-    int white_pix_count = 0;
-
-    // loop through image pixels from top to bottom, and column/step wise
-    for (int i = 0; i < rows ; ++i) {
-        for (int j = 0; j < steps; ++j) {
-            if (img.data[i * steps + j] == white_pixel) {
-                offset += j - image_center;
-                white_pix_count++;
-            }
+        // all three channels have white pixels
+        if(red_channel == white_pixel && green_channel == white_pixel
+           && blue_channel == white_pixel){
+               if(mat_col_index <=265){
+                   l_pixels++;   
+               }
+               if(mat_col_index > 265 && mat_col_index <=533){
+                   m_pixels++;
+               }
+               if(mat_col_index > 533){
+                   r_pixels++;
+               }
         }
     }
 
-    float avg_offset = offset/white_pix_count;
+    // 
+    int direction = (l_pixels > m_pixels) 
+                        ?  (l_pixels > r_pixels ? l_pixels : r_pixels)
+                        :  (m_pixels > r_pixels ? m_pixels : r_pixels);
     
-    ROS_INFO("%d whitel pixels found. average  is %f", white_pix_count, avg_offset);
-
-    // when no white pixel found
-    /*keep looking for white ball pixel by rotating right?
-    if(white_pix_count == 0){
-        lin_x = 0.0;
-        ang_z = -0.5;
-    }*/
-    if(white_pix_count == 0){ // stop 
-        lin_x = 0.0;
-        ang_z = 0.0;
-    }else{
-        lin_x = 0.1;
-        // rough offset estimate 
-        ang_z = -4.0 * avg_offset / image_center;
+    // Depending on the white ball position, call the drive_bot function and pass velocities to it.
+    // Request a stop when there's no white ball seen by the camera.
+    ROS_INFO("Direction = %d, and pixels =[%d, %d, %d]", direction, l_pixels, m_pixels, r_pixels);
+    if(direction == l_pixels){
+        /* drive toward left */
+        drive_robot(0.0, -0.5);
     }
-
-    drive_robot(lin_x, ang_z);
+    
+    if(direction == m_pixels){
+        /* drive forward */
+        drive_robot(0.5, 0.0);
+    }
+    
+    if(direction == r_pixels){
+        /* drive toward right */
+        drive_robot(0.0, 0.5);
+    }
+    
+    if(direction == 0.0){
+        /* otherwise stop */
+        drive_robot(0.0, 0.0);
+    }
 }
 
 int main(int argc, char** argv)
