@@ -7,10 +7,10 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/ashish/Lab/Robotics/ros-robot/catkin_ws/devel:$CMAKE_PREFIX_PATH"
-export LD_LIBRARY_PATH="/home/ashish/Lab/Robotics/ros-robot/catkin_ws/devel/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="/home/ashish/Lab/Robotics/ros-robot/catkin_ws/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PWD="/home/ashish/Lab/Robotics/ros-robot/catkin_ws/build"
-export PYTHONPATH="/home/ashish/Lab/Robotics/ros-robot/catkin_ws/devel/lib/python2.7/dist-packages:$PYTHONPATH"
-export ROSLISP_PACKAGE_DIRECTORIES="/home/ashish/Lab/Robotics/ros-robot/catkin_ws/devel/share/common-lisp"
-export ROS_PACKAGE_PATH="/home/ashish/Lab/Robotics/ros-robot/catkin_ws/src:/home/mugen/Lab/Robotics/ros-robot/catkin_ws/src:$ROS_PACKAGE_PATH"
+export CMAKE_PREFIX_PATH="/home/mugen/Lab/ros-robot/catkin_ws/devel:$CMAKE_PREFIX_PATH"
+export LD_LIBRARY_PATH="/home/mugen/Lab/ros-robot/catkin_ws/devel/lib:$LD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="/home/mugen/Lab/ros-robot/catkin_ws/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PWD="/home/mugen/Lab/ros-robot/catkin_ws/build"
+export PYTHONPATH="/home/mugen/Lab/ros-robot/catkin_ws/devel/lib/python2.7/dist-packages:$PYTHONPATH"
+export ROSLISP_PACKAGE_DIRECTORIES="/home/mugen/Lab/ros-robot/catkin_ws/devel/share/common-lisp"
+export ROS_PACKAGE_PATH="/home/ashish/Lab/Robotics/ros-robot/catkin_ws/src:/home/mugen/Lab/Robotics/ros-robot/catkin_ws/src:/home/mugen/Lab/ros-robot/catkin_ws/src:$ROS_PACKAGE_PATH"

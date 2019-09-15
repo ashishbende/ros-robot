@@ -1,2 +1,2 @@
 - setup-file:
-    local-name: /home/ashish/Lab/Robotics/ros-robot/catkin_ws/devel/setup.sh
+    local-name: /home/mugen/Lab/ros-robot/catkin_ws/devel/setup.sh

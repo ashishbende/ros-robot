@@ -1,8 +1,8 @@
-prefix=/home/ashish/Lab/Robotics/ros-robot/catkin_ws/install
+prefix=/home/mugen/Lab/ros-robot/catkin_ws/install
 
 Name: ball_chaser
 Description: Description of ball_chaser
 Version: 0.0.0
-Cflags: -I/home/ashish/Lab/Robotics/ros-robot/catkin_ws/install/include
-Libs: -L/home/ashish/Lab/Robotics/ros-robot/catkin_ws/install/lib 
+Cflags: -I/home/mugen/Lab/ros-robot/catkin_ws/install/include
+Libs: -L/home/mugen/Lab/ros-robot/catkin_ws/install/lib 
 Requires: 
